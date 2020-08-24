@@ -1,0 +1,19 @@
+* {box-sizing: border-box;}
+
+#gameStart {
+    text-align: center;
+    cursor: pointer;
+}
+#gameData {
+    display: none;
+}
+
+#createdCards {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+
+}
+#buttons {
+    display: none;
+}

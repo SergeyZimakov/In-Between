@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="./main.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div id="gameStart" onclick="gameStart()">
+        <h1>Start a game</h1>
+    </div>
+    <div id="gameData">
+        <h2>Hits: <span id="hits"></span></h2>
+        <h2>Misses: <span id="misses"></span></h2>
+        <h2>Reamaining cards in the deck: <span id="remCards"></span></h2>
+    </div>
+
+    <div id="gameField">
+        <div id="createdCards"></div>
+        <div id="buttons">
+            <button onclick="pressIn()">IN</button>
+            <button onclick="pressOut()">OUT</button>
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -7,13 +7,30 @@
 #gameData {
     display: none;
 }
-
-#createdCards {
-    width: 60%;
-    display: flex;
-    justify-content: space-between;
-
+#gameField {
+    position: relative;
+}
+#cards {
+    width: 70%;
+    /* display: flex;
+    justify-content: space-between; */
+    position: relative;
+}
+.lowestCard {
+    position: absolute;
+    left: 0;
+}
+.highestCard {
+    position: absolute;
+    right: 0;
+}
+.fletchedCard {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 #buttons {
     display: none;
+    position: absolute;
+    bottom: -10px;
 }

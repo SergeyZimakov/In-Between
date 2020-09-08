@@ -8,29 +8,37 @@
     display: none;
 }
 #gameField {
-    position: relative;
+    width: 70%;
 }
 #cards {
-    width: 70%;
-    /* display: flex;
-    justify-content: space-between; */
-    position: relative;
+    display: flex;
+    justify-content: space-between;
 }
 .lowestCard {
-    position: absolute;
-    left: 0;
+    order: 1;
 }
 .highestCard {
-    position: absolute;
-    right: 0;
+    order: 3;
 }
 .fletchedCard {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    order: 2;
 }
 #buttons {
     display: none;
-    position: absolute;
-    bottom: -10px;
+    margin-top: 20px;
+    text-align: center;
+}
+button {
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: cornflowerblue;
+    border: 1px solid rgb(3, 51, 206);
+    color: white;
+    cursor: pointer;
+    font-size: 28px;
+    margin: 20px;
+}
+button:hover {
+    background-color: rgb(61, 124, 240);
 }

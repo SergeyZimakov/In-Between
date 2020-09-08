@@ -20,7 +20,7 @@ function gameStart() {
         success: function (response) {
             console.log(response);
             state.deck_id = response.deck_id;
-            pickTwoCards(state.deck_id);
+            pickTwoCards();
         },
         error: function (error) {
             console.log('error');
@@ -31,10 +31,10 @@ function gameStart() {
     $('#gameData').fadeIn(3);
 }
 
-function pickTwoCards(deck_id) {
+function pickTwoCards() {
     $.ajax({
         type: 'Get',
-        url: `https://deckofcardsapi.com/api/deck/${deck_id}/draw/?count=2`,
+        url: `https://deckofcardsapi.com/api/deck/${state.deck_id}/draw/?count=2`,
         success: function (response) {
             console.log(response);
             pushTwoCardsToState(response.cards);

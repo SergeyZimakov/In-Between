@@ -14,15 +14,7 @@
     display: flex;
     justify-content: space-between;
 }
-.lowestCard {
-    order: 1;
-}
-.highestCard {
-    order: 3;
-}
-.fletchedCard {
-    order: 2;
-}
+
 #buttons {
     display: none;
     margin-top: 20px;

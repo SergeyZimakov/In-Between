@@ -20,6 +20,10 @@ function gameStart() {
         success: function (response) {
             console.log(response);
             state.deck_id = response.deck_id;
+            state.remaining = response.remaining;
+            displayResult();
+            $('#gameStart').hide();
+            $('#gameData').fadeIn(3);
             pickTwoCards();
         },
         error: function (error) {
@@ -27,8 +31,8 @@ function gameStart() {
         },
 
     })
-    $('#gameStart').hide();
-    $('#gameData').fadeIn(3);
+    // $('#gameStart').hide();
+    // $('#gameData').fadeIn(3);
 }
 
 function pickTwoCards() {
@@ -37,6 +41,8 @@ function pickTwoCards() {
         url: `https://deckofcardsapi.com/api/deck/${state.deck_id}/draw/?count=2`,
         success: function (response) {
             console.log(response);
+            state.remaining = response.remaining;
+            displayResult();
             pushTwoCardsToState(response.cards);
             displayTwoCards(response.cards);
             $('#buttons').fadeIn(3);
@@ -51,10 +57,7 @@ function pickTwoCards() {
 function pushTwoCardsToState(card) {
     cardValueToNumber(card[0]);
     cardValueToNumber(card[1]);
-    if (card[0].value === card[1].value) {
-        gameStart();
-    }
-    else if (card[0].value < card[1].value) {
+    if (card[0].value < card[1].value) {
         state.lowestCard = card[0].value;
         state.highestCard = card[1].value;
     }
@@ -88,9 +91,9 @@ function cardValueToNumber(card) {
 }
 
 
-function displayTwoCards(cards) {
-    $('#cards').append(`<div class="lowestCard"><img src="${cards[0].image}"></div>`); 
-    $('#cards').append(`<div class="highestCard"><img src="${cards[1].image}"></div>`); 
+function displayTwoCards(cards) { 
+    $('#cards').append(`<div style="order: 1;"><img src="${cards[0].image}"></div>`); 
+    $('#cards').append(`<div style="order: 3;"><img src="${cards[1].image}"></div>`); 
 }
 
 
@@ -112,9 +115,10 @@ function flethCard() {
         url: `https://deckofcardsapi.com/api/deck/${state.deck_id}/draw/?count=1`,
         success: function (response) {
             console.log(response);
+            state.remaining = response.remaining;
             cardValueToNumber(response.cards[0]);
             $('.fletchedCard').empty();
-            $('#cards').append(`<div class="fletchedCard"><img src="${response.cards[0].image}"></div>`);
+            $('#cards').append(`<div style="order: 2;"><img src="${response.cards[0].image}"></div>`);
             if (checkResult(response.cards[0].value)) {
                 state.hits ++; 
             }
@@ -122,6 +126,20 @@ function flethCard() {
                 state.misses ++;
             }
             displayResult();
+            $('#buttons').fadeOut(3);
+            setTimeout(() => {
+                if (state.remaining >= 3) {
+                    newRound();
+                }
+                else {
+                    if (state.hits > state.misses) {
+                        alert('You win !!!');
+                    }
+                    else {
+                        alert('You lose');
+                    }
+                }
+            }, 3000);
         },
         error: function (error) {
             console.log('error');
@@ -153,4 +171,11 @@ function checkResult(value) {
 function displayResult() {
     $('#hits').html(state.hits);
     $('#misses').html(state.misses);
+    $('#remaining').html(state.remaining);
+}
+
+function newRound() {
+    $('#cards').empty();
+    pickTwoCards();
+
 }
